@@ -118,9 +118,12 @@ def visualize():
     x_train['team'] = (x_train['team']=='team2').astype(dtype=int)
     #fill missing values with 0
     x_train = x_train.fillna(0)
-    
+    col_names = list(x_train)
+    print(col_names)
+    stdscaler = preprocessing.StandardScaler()
+    x_train = pd.DataFrame(stdscaler.fit_transform(x_train.values),columns=col_names)
 
-    
+    print("plotting")
     sns.heatmap(x_train.corr(), annot=True, cmap="YlGnBu")
     plt.show()
 
